@@ -1,4 +1,4 @@
-# for Plack-Middleware-PictogramFallback-TypeCast
+# for Plack-Middleware-UnicodePictogramFallback-TypeCast
 
 # author's tests
 Test::Pod

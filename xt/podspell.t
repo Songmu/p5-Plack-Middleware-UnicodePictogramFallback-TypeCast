@@ -19,7 +19,7 @@ all_pod_files_spelling_ok('lib');
 __DATA__
 Masayuki Matsuki
 y.songmu@gmail.com
-Plack::Middleware::PictogramFallback::TypeCast
+Plack::Middleware::UnicodePictogramFallback::TypeCast
 pictogram
 
 # computer terms

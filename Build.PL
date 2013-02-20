@@ -23,8 +23,8 @@ my $build = Module::Build->new(
     },
 
     no_index    => { 'directory' => [ 'inc' ] },
-    name        => 'Plack/Middleware/PictogramFallback/TypeCast',
-    module_name => 'Plack::Middleware::PictogramFallback::TypeCast',
+    name        => 'Plack/Middleware/UnicodePictogramFallback/TypeCast',
+    module_name => 'Plack::Middleware::UnicodePictogramFallback::TypeCast',
 
     test_files           => (-d '.git' || $ENV{RELEASE_TESTING}) ? 't/ xt/' : 't/',
     recursive_test_files => 1,
