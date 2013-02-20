@@ -20,6 +20,7 @@ __DATA__
 Masayuki Matsuki
 y.songmu@gmail.com
 Plack::Middleware::PictgramFallback::TypeCast
+pictogram
 
 # computer terms
 API

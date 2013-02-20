@@ -64,7 +64,7 @@ __END__
 
 =head1 NAME
 
-Plack::Middleware::PictgramFallback::TypeCast - Perl extention to do something
+Plack::Middleware::PictgramFallback::TypeCast - Unicode pictogram fallback to HTML
 
 =head1 VERSION
 
@@ -73,18 +73,27 @@ This document describes Plack::Middleware::PictgramFallback::TypeCast version 0.
 =head1 SYNOPSIS
 
     use Plack::Middleware::PictgramFallback::TypeCast;
+    use Plack::Builder;
+
+    my $app = sub {
+        [200, ['Content-Type' => 'text/html', 'Content-Length' => 16], ["<body>\xE2\x98\x80</body>"]];
+    };
+    builder {
+        enable 'PictgramFallback::TypeCast',
+            template => '<img src="/img/emoticon/%s.gif" />';
+        $app;
+    };
+    # returns <body><img src="/img/emoticon/sun.gif /></body>
 
 =head1 DESCRIPTION
 
-# TODO
+Unicode pictogram fallback to HTML
 
-=head1 INTERFACE
+=head1 CAUTION
 
-=head2 Functions
+Content-Length header will be removed if content is filtered.
 
-=head3 C<< hello() >>
-
-# TODO
+You can use this in conjunction with L<Plack::Middleware::ContentLength>.
 
 =head1 DEPENDENCIES
 
