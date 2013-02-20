@@ -5,14 +5,14 @@ use Plack::Test;
 
 use HTTP::Request::Common;
 
-use Plack::Middleware::PictgramFallback::TypeCast;
+use Plack::Middleware::PictogramFallback::TypeCast;
 
 my $sun_unicode = "\xE2\x98\x80";
 my $app = sub {
     [200, ['Content-Type' => 'text/html', 'Content-Length' => 16], ["<body>$sun_unicode</body>"]];
 };
 
-$app = Plack::Middleware::PictgramFallback::TypeCast->wrap($app,
+$app = Plack::Middleware::PictogramFallback::TypeCast->wrap($app,
     template => '<img src="/img/emoticon/%s.gif" />'
 );
 

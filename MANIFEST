@@ -1,6 +1,6 @@
 Build.PL
 Changes
-lib/Plack/Middleware/PictgramFallback/TypeCast.pm
+lib/Plack/Middleware/PictogramFallback/TypeCast.pm
 LICENSE
 MANIFEST			This list of files
 META.json

@@ -5,7 +5,7 @@ use Module::Build;
 my $build = Module::Build->new(
     license        => 'perl',
     dynamic_config => 0,
-    dist_abstract  => 'unicode pictgram fallback to html',
+    dist_abstract  => 'unicode pictogram fallback to html',
 
     build_requires     => {
         'Test::More'     => '0.98',
@@ -23,8 +23,8 @@ my $build = Module::Build->new(
     },
 
     no_index    => { 'directory' => [ 'inc' ] },
-    name        => 'Plack/Middleware/PictgramFallback/TypeCast',
-    module_name => 'Plack::Middleware::PictgramFallback::TypeCast',
+    name        => 'Plack/Middleware/PictogramFallback/TypeCast',
+    module_name => 'Plack::Middleware::PictogramFallback::TypeCast',
 
     test_files           => (-d '.git' || $ENV{RELEASE_TESTING}) ? 't/ xt/' : 't/',
     recursive_test_files => 1,

@@ -3,7 +3,7 @@ use strict;
 use Test::More tests => 1;
 
 BEGIN {
-    use_ok 'Plack::Middleware::PictgramFallback::TypeCast';
+    use_ok 'Plack::Middleware::PictogramFallback::TypeCast';
 }
 
-diag "Testing Plack::Middleware::PictgramFallback::TypeCast/$Plack::Middleware::PictgramFallback::TypeCast::VERSION";
+diag "Testing Plack::Middleware::PictogramFallback::TypeCast/$Plack::Middleware::PictogramFallback::TypeCast::VERSION";

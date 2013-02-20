@@ -16,12 +16,12 @@ my $map = Dumper $docomo_map;
 my $tmpl = do {local $/; <DATA>};
 my $content = eval qq{my \$map = qq{$map}; "$tmpl"};
 
-my $file = 'lib/Plack/Middleware/PictgramFallback/TypeCast/EmoticonMap.pm';
+my $file = 'lib/Plack/Middleware/PictogramFallback/TypeCast/EmoticonMap.pm';
 open my $fh, '>', $file;
 print $fh $content;
 
 __DATA__
-package Plack::Middleware::PictgramFallback::TypeCast::EmoticonMap;
+package Plack::Middleware::PictogramFallback::TypeCast::EmoticonMap;
 use strict;
 use warnings;
 

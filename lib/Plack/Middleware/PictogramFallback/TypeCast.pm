@@ -1,4 +1,4 @@
-package Plack::Middleware::PictgramFallback::TypeCast;
+package Plack::Middleware::PictogramFallback::TypeCast;
 use 5.008_001;
 use strict;
 use warnings;
@@ -6,7 +6,7 @@ use warnings;
 our $VERSION = '0.01';
 
 use Plack::Util;
-use Plack::Middleware::PictgramFallback::TypeCast::EmoticonMap;
+use Plack::Middleware::PictogramFallback::TypeCast::EmoticonMap;
 use Encode qw/encode_utf8 decode/;
 use Encode::JP::Mobile ':props';
 use Encode::JP::Mobile::UnicodeEmoji;
@@ -43,7 +43,7 @@ sub call {
 sub _filter {
     my ($self, $html) = @_;
     $html = decode('x-utf8-jp-mobile-unicode-emoji', $html);
-    my $emoticon_map = Plack::Middleware::PictgramFallback::TypeCast::EmoticonMap::MAP;
+    my $emoticon_map = Plack::Middleware::PictogramFallback::TypeCast::EmoticonMap::MAP;
 
     $html =~ s{(\p{InMobileJPPictograms})}{
         my $char = $1;
@@ -64,22 +64,22 @@ __END__
 
 =head1 NAME
 
-Plack::Middleware::PictgramFallback::TypeCast - Unicode pictogram fallback to HTML
+Plack::Middleware::PictogramFallback::TypeCast - Unicode pictogram fallback to HTML
 
 =head1 VERSION
 
-This document describes Plack::Middleware::PictgramFallback::TypeCast version 0.01.
+This document describes Plack::Middleware::PictogramFallback::TypeCast version 0.01.
 
 =head1 SYNOPSIS
 
-    use Plack::Middleware::PictgramFallback::TypeCast;
+    use Plack::Middleware::PictogramFallback::TypeCast;
     use Plack::Builder;
 
     my $app = sub {
         [200, ['Content-Type' => 'text/html', 'Content-Length' => 16], ["<body>\xE2\x98\x80</body>"]];
     };
     builder {
-        enable 'PictgramFallback::TypeCast',
+        enable 'PictogramFallback::TypeCast',
             template => '<img src="/img/emoticon/%s.gif" />';
         $app;
     };

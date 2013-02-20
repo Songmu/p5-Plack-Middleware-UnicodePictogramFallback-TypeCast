@@ -1,4 +1,4 @@
-package Plack::Middleware::PictgramFallback::TypeCast::EmoticonMap;
+package Plack::Middleware::PictogramFallback::TypeCast::EmoticonMap;
 use strict;
 use warnings;
 
