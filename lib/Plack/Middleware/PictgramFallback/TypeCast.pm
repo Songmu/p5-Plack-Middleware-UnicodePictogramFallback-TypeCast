@@ -29,28 +29,20 @@ sub call {
     my $h = Plack::Util::headers($res->[1]);
     return $res if $h->get('Content-Type') !~ m!^text/!;
 
-    if (ref($res) && ref($res) eq 'ARRAY') {
-        my $html = $res->[2][0];
-        $html = $self->_filter($html);
-        $res->[2][0] = $html;
-        return $res;
-    }
-    else {
-        $self->response_cb($res, sub {
-            my $res = shift;
-            return sub {
-                my $chunk = shift;
-                return unless defined $chunk;
+    $self->response_cb($res, sub {
+        my $res = shift;
+        return sub {
+            my $chunk = shift;
+            return unless defined $chunk;
 
-                $self->_filter($chunk);
-            };
-        });
-    }
+            $self->_filter($chunk);
+        };
+    });
 }
 
 sub _filter {
     my ($self, $html) = @_;
-    $html = decode('x-utf8-jp-mobile-unicode-emoji', $html );
+    $html = decode('x-utf8-jp-mobile-unicode-emoji', $html);
     my $emoticon_map = Plack::Middleware::PictgramFallback::TypeCast::EmoticonMap::MAP;
 
     $html =~ s{(\p{InMobileJPPictograms})}{
