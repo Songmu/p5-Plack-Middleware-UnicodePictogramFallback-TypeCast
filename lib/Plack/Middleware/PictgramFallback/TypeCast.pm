@@ -5,6 +5,67 @@ use warnings;
 
 our $VERSION = '0.01';
 
+use Plack::Util;
+use Plack::Middleware::PictgramFallback::TypeCast::EmoticonMap;
+use Encode qw/encode_utf8 decode/;
+use Encode::JP::Mobile ':props';
+use Encode::JP::Mobile::UnicodeEmoji;
+
+use parent 'Plack::Middleware';
+use Plack::Util::Accessor qw(
+    template
+);
+
+sub prepare_app {
+    my $self = shift;
+
+    die 'requires template' unless $self->template;
+}
+
+sub call {
+    my ($self, $env) = @_;
+    my $res = $self->app->($env);
+
+    my $h = Plack::Util::headers($res->[1]);
+    return $res if $h->get('Content-Type') !~ m!^text/!;
+
+    if (ref($res) && ref($res) eq 'ARRAY') {
+        my $html = $res->[2][0];
+        $html = $self->_filter($html);
+        $res->[2][0] = $html;
+        return $res;
+    }
+    else {
+        $self->response_cb($res, sub {
+            my $res = shift;
+            return sub {
+                my $chunk = shift;
+                return unless defined $chunk;
+
+                $self->_filter($chunk);
+            };
+        });
+    }
+}
+
+sub _filter {
+    my ($self, $html) = @_;
+    $html = decode('x-utf8-jp-mobile-unicode-emoji', $html );
+    my $emoticon_map = Plack::Middleware::PictgramFallback::TypeCast::EmoticonMap::MAP;
+
+    $html =~ s{(\p{InMobileJPPictograms})}{
+        my $char = $1;
+        my $code = sprintf '%X', ord $char;
+
+        if (my $name = $emoticon_map->{$code}) {
+            sprintf $self->template, $name, $char;
+        } else {
+            $char;
+        }
+    }ge;
+
+    encode_utf8 $html;
+}
 
 1;
 __END__
