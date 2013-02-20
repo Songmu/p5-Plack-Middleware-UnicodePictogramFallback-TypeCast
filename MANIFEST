@@ -1,6 +1,7 @@
 Build.PL
 Changes
 lib/Plack/Middleware/UnicodePictogramFallback/TypeCast.pm
+lib/Plack/Middleware/UnicodePictogramFallback/TypeCast/EmoticonMap.pm
 LICENSE
 MANIFEST			This list of files
 META.json
@@ -8,8 +9,8 @@ META.yml
 README
 t/000_load.t
 t/001_basic.t
+tool/create_emoticon_map.pl
 xt/perlcritic.t
 xt/pod.t
-xt/podcoverage.t
 xt/podspell.t
 xt/podsynopsis.t

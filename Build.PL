@@ -10,7 +10,7 @@ my $build = Module::Build->new(
     build_requires     => {
         'Test::More'     => '0.98',
         'Test::Requires' => '0.06',
-        'HTTP::Request::Common' => '0';
+        'HTTP::Request::Common' => '0',
     },
     configure_requires => { 'Module::Build' => '0.38' },
     requires           => {
@@ -19,7 +19,6 @@ my $build = Module::Build->new(
         'Plack'              => '1.00',
         'Encode::JP::Mobile' => '0',
         'Encode::JP::Mobile::UnicodeEmoji' => '0',
-
     },
 
     no_index    => { 'directory' => [ 'inc' ] },
