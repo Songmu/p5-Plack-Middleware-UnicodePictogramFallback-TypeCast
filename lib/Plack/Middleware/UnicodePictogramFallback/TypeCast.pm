@@ -2,6 +2,7 @@ package Plack::Middleware::UnicodePictogramFallback::TypeCast;
 use 5.008_001;
 use strict;
 use warnings;
+use utf8;
 
 our $VERSION = '0.01';
 
@@ -14,6 +15,7 @@ use Encode::JP::Mobile::UnicodeEmoji;
 use parent 'Plack::Middleware';
 use Plack::Util::Accessor qw(
     template
+    fallback
 );
 
 sub prepare_app {
@@ -42,9 +44,11 @@ sub call {
 
 sub _filter {
     my ($self, $html) = @_;
+
     $html = decode('x-utf8-jp-mobile-unicode-emoji', $html);
     my $emoticon_map = Plack::Middleware::UnicodePictogramFallback::TypeCast::EmoticonMap::MAP;
 
+    my $fallback = $self->fallback || sub {'〓'};
     $html =~ s{(\p{InMobileJPPictograms})}{
         my $char = $1;
         my $code = sprintf '%X', ord $char;
@@ -52,7 +56,7 @@ sub _filter {
         if (my $name = $emoticon_map->{$code}) {
             sprintf $self->template, $name, $char;
         } else {
-            $char;
+            encode_utf8 $fallback->($char);
         }
     }ge;
 
