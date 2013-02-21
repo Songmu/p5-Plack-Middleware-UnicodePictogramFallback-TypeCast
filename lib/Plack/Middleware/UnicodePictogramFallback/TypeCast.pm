@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use utf8;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 use Plack::Util;
 use Plack::Middleware::UnicodePictogramFallback::TypeCast::EmoticonMap;
@@ -72,7 +72,7 @@ Plack::Middleware::UnicodePictogramFallback::TypeCast - Unicode pictogram fallba
 
 =head1 VERSION
 
-This document describes Plack::Middleware::UnicodePictogramFallback::TypeCast version 0.01.
+This document describes Plack::Middleware::UnicodePictogramFallback::TypeCast version 0.02.
 
 =head1 SYNOPSIS
 
