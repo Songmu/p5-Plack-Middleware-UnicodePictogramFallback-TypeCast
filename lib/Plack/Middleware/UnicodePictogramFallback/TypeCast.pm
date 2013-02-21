@@ -80,7 +80,7 @@ This document describes Plack::Middleware::UnicodePictogramFallback::TypeCast ve
     use Plack::Builder;
 
     my $app = sub {
-        [200, ['Content-Type' => 'text/html', 'Content-Length' => 16], ["<body>\xE2\x98\x80</body>"]];
+        [200, ['Content-Type' => 'text/html'], ["<body>\xE2\x98\x80</body>"]];
     };
     builder {
         enable 'UnicodePictogramFallback::TypeCast',
